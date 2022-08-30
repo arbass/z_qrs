@@ -3,6 +3,7 @@ let observer__mutationIndicators;
 let status__tagsPrepare = false;
 let status__tagsPrepareTimer;
 let button__showMore = document.querySelector('.blog-articles-full-list_pagination-button');
+let array__catButtons = document.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
 
 function tagsShow() {
     let array__tagsWrappers = document.querySelectorAll('.blog-articles-list_card-tags-wrapper.is-nest-waiter');
@@ -28,11 +29,20 @@ function tagsShow() {
                     arrayElements__currentTopics[1].classList.remove('hide');
                 });
 
-                let cloneTag = document.querySelector('.inter-tag-line-semibold.is-element.is-style-grey-300').cloneNode(true);
+                let cloneTag = el__tagsWrappers.parentElement.parentElement.nextElementSibling;
+                cloneTag.classList.remove('hide');
                 let cloneTag__appender = el__tagsWrappers.querySelector('.blog-articles-list_card-tags-wrapper_nest');
-                cloneTag.textContent = ('+' + (arrayElements__currentTopics.length - 2));
-                cloneTag.classList.add('cursor-question');
-                cloneTag__appender.append(cloneTag);
+                let tagTextCounter = cloneTag.querySelector('.additional-tags_toggle-text');
+                tagTextCounter.textContent = ('+' + (arrayElements__currentTopics.length - 2));
+                arrayElements__currentTopics[1].after(cloneTag);
+                //
+                setTimeout(function() {
+                    window.Webflow && window.Webflow.destroy();
+                    window.Webflow && window.Webflow.ready();
+                    window.Webflow && window.Webflow.require( 'ix2' ).init();
+                    document.dispatchEvent( new Event( 'readystatechange' ) );
+                } , 500);
+                //
             }
 
             if (el__tagsWrappers.classList.contains('is-black-subtree-tags')) {
@@ -46,9 +56,7 @@ function tagsShow() {
     });
 }
 
-button__showMore.addEventListener('click', function() {
-    setTimeout(tagsShow, 50);
-});
+setInterval(tagsShow, 1000);
 
 function startAfterTagsPrepare() {
     tagsShow();
