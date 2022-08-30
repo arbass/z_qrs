@@ -142,3 +142,7 @@ setTimeout(() => {
      });
 
 }, 2000);
+
+console.log('test transfer');
+
+//make empty array
