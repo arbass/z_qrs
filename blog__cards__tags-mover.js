@@ -43,6 +43,13 @@ function tagsShow() {
                     document.dispatchEvent( new Event( 'readystatechange' ) );
                 } , 500);
                 //
+                let allHiddenTags = el__tagsWrappers.querySelectorAll('.cl-i_blog-articles-list_card-tags-wrapper.hide');
+                let lengthString;
+                let currentAdditionalTagsStart = el__tagsWrappers.querySelector('.start_additional-tags_list-wrapper');
+                allHiddenTags.forEach(el => {
+                    currentAdditionalTagsStart.after(el);
+                    el.classList.remove('hide');
+                });
             }
 
             if (el__tagsWrappers.classList.contains('is-black-subtree-tags')) {
@@ -56,11 +63,11 @@ function tagsShow() {
     });
 }
 
-setInterval(tagsShow, 500);
+setInterval(tagsShow, 1000);
 // Это не профессиональное решение, но пока не получилось исправить проблему с повторным вызовом функции после переключения категорий.
 
 function startAfterTagsPrepare() {
-    tagsShow();
+    // tagsShow();
 }
 
 function startAfterMutationObserver() {
