@@ -87,14 +87,14 @@ function startAfterTagsPrepare() {
     //меняем классы по клику PC
     let allClickableTopicsPc = topicsCheckboxesAppenderPc.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
     allClickableTopicsPc.forEach(clickableTopic => {
-        clickableTopic.addEventListener('click', function () {
+        clickableTopic.addEventListener('mousedown', function () {
             clickableTopic.parentElement.classList.toggle('is-active-topic');
         });
     });
     //меняем классы по клику Tablet
     let allClickableTopicsTablet = topicsCheckboxesAppenderTablet.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
     allClickableTopicsTablet.forEach(clickableTopic => {
-        clickableTopic.addEventListener('click', function () {
+        clickableTopic.addEventListener('mousedown', function () {
             clickableTopic.parentElement.classList.toggle('is-active-topic');
         });
     });
