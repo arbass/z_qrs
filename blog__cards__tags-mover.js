@@ -56,7 +56,8 @@ function tagsShow() {
     });
 }
 
-setInterval(tagsShow, 1000);
+setInterval(tagsShow, 500);
+// Это не профессиональное решение, но пока не получилось исправить проблему с повторным вызовом функции после переключения категорий.
 
 function startAfterTagsPrepare() {
     tagsShow();
