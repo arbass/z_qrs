@@ -31,7 +31,7 @@ function tagsShow() {
 
                 let cloneTag = el__tagsWrappers.parentElement.parentElement.nextElementSibling;
                 cloneTag.classList.remove('hide');
-                let cloneTag__appender = el__tagsWrappers.querySelector('.blog-articles-list_card-tags-wrapper_nest');
+                //let cloneTag__appender = el__tagsWrappers.querySelector('.blog-articles-list_card-tags-wrapper_nest');
                 let tagTextCounter = cloneTag.querySelector('.additional-tags_toggle-text');
                 tagTextCounter.textContent = ('+' + (arrayElements__currentTopics.length - 2));
                 arrayElements__currentTopics[1].after(cloneTag);
@@ -44,7 +44,7 @@ function tagsShow() {
                 } , 500);
                 //
                 let allHiddenTags = el__tagsWrappers.querySelectorAll('.cl-i_blog-articles-list_card-tags-wrapper.hide');
-                let lengthString;
+                // let lengthString;
                 let currentAdditionalTagsStart = el__tagsWrappers.querySelector('.start_additional-tags_list-wrapper');
                 allHiddenTags.forEach(el => {
                     currentAdditionalTagsStart.after(el);
@@ -65,6 +65,7 @@ function tagsShow() {
 
 setInterval(tagsShow, 1000);
 // Это не профессиональное решение, но пока не получилось исправить проблему с повторным вызовом функции после переключения категорий.
+// Пусть лучше это будет считывание клика по Body
 
 function startAfterTagsPrepare() {
     //клонирууем чекбоксы
