@@ -195,3 +195,5 @@ array__mutationIndicators.forEach(el__mutationIndicators => {
     observer__mutationIndicators = new MutationObserver(startAfterMutationObserver);
     observer__mutationIndicators.observe(target, config);
 });
+
+//test
