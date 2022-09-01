@@ -63,11 +63,16 @@ function tagsShow() {
     });
 }
 
-setInterval(tagsShow, 1000);
-// Это не профессиональное решение, но пока не получилось исправить проблему с повторным вызовом функции после переключения категорий.
-// Пусть лучше это будет считывание клика по Body
+document.querySelector('body').addEventListener('click', function(e) {
+    tagsShow();
+    setTimeout(tagsShow, 1000);
+    setTimeout(tagsShow, 2500);
+});
+
 
 function startAfterTagsPrepare() {
+    tagsShow();
+
     //клонирууем чекбоксы
     let topicsCheckboxesWrapper = document.querySelector('.mirror-element-true');
     //pc version
