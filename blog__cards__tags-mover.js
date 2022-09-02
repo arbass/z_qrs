@@ -1,4 +1,7 @@
+//@collapse
+
 let array__mutationIndicators = document.querySelectorAll('[mutation-indicator]');
+let form__filtersControls = document.querySelector('.blog-articles-filter-and-search_block-form');
 let observer__mutationIndicators;
 let status__tagsPrepare = false;
 let status__tagsPrepareTimer;
@@ -104,7 +107,7 @@ function startAfterTagsPrepare() {
     //         clickableTopic.parentElement.classList.toggle('is-active-topic');
     //     });
     // });
-    //let find true checkboxes
+    // let find true checkboxes
     let allTrueCheckboxes = document.querySelectorAll('.mirror-element-true .blog-articles-filter-and-search_radio-button-field');
     //зеркалим клики PC
     let allFalseCheckboxesPC = document.querySelectorAll('.blog-articles-full-list_topics-appender .blog-articles-filter-and-search_radio-button-field');
@@ -196,4 +199,31 @@ array__mutationIndicators.forEach(el__mutationIndicators => {
     observer__mutationIndicators.observe(target, config);
 });
 
-//test 2 sen
+
+function syncFilters () {
+    //нужно определить список тегов как src of true 
+    //и определить список тегов как src of false
+    let allTrue__categoryTags = document.querySelectorAll('.mirror-element-true_categories .blog-articles-filter-and-search_radio-button-text.is-category');
+    let allFalse__categoryTags = document.querySelectorAll('.filter-and-search-mob_category-button .blog-articles-filter-and-search_radio-button-text');
+
+    allTrue__categoryTags.forEach((true__categoryTag, id__categoryTag) => {
+        if(true__categoryTag.classList.contains('is-active') == true) {
+            allFalse__categoryTags.forEach(fasle__categoryTag => {
+                fasle__categoryTag.classList.remove('is-active');
+            });
+            allFalse__categoryTags[id__categoryTag].parentElement.classList.add('is-active');
+        }
+    });
+}
+
+//создаем новую мутацию, чтобы следить за изменением в кнопках фильтров
+let mutationTarget__filterControls = form__filtersControls;
+const mutationConfig__filterControls = {
+    attributes: true,
+    childList: true,
+    subtree: true
+};
+// Создаём экземпляр наблюдателя с указанной функцией колбэка
+const observer__filterControls = new MutationObserver(syncFilters);
+// Начинаем наблюдение за настроенными изменениями целевого элемента
+observer__filterControls.observe(mutationTarget__filterControls, mutationConfig__filterControls);
