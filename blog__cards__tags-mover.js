@@ -1,4 +1,4 @@
-//@collapse
+////@collapse
 
 let array__mutationIndicators = document.querySelectorAll('[mutation-indicator]');
 let form__filtersControls = document.querySelector('.blog-articles-filter-and-search_block-form');
@@ -75,106 +75,6 @@ document.querySelector('body').addEventListener('click', function(e) {
 
 function startAfterTagsPrepare() {
     tagsShow();
-
-    //клонирууем чекбоксы
-    let topicsCheckboxesWrapper = document.querySelector('.mirror-element-true');
-    //pc version
-    let clone_topicsCheckboxesWrapperPc = topicsCheckboxesWrapper.cloneNode(true);
-    clone_topicsCheckboxesWrapperPc.classList.remove('mirror-element-true');
-    clone_topicsCheckboxesWrapperPc.classList.add('mirror-element-false');
-    //tablet version
-    let clone_topicsCheckboxesWrapperTablet = topicsCheckboxesWrapper.cloneNode(true);
-    clone_topicsCheckboxesWrapperTablet.classList.remove('mirror-element-true');
-    clone_topicsCheckboxesWrapperTablet.classList.add('mirror-element-false');
-    //let find appenders
-    let topicsCheckboxesAppenderPc = document.querySelector('.blog-articles-full-list_topics-appender');
-    let topicsCheckboxesAppenderTablet = document.querySelector('.filter-and-search-mob_category-dropdown-list-inner.is-topic');
-    //pc version
-    topicsCheckboxesAppenderPc.append(clone_topicsCheckboxesWrapperPc);
-    //tablet version
-    topicsCheckboxesAppenderTablet.append(clone_topicsCheckboxesWrapperTablet);
-    //меняем классы по клику PC
-    // let allClickableTopicsPc = topicsCheckboxesAppenderPc.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
-    // allClickableTopicsPc.forEach(clickableTopic => {
-    //     clickableTopic.addEventListener('mousedown', function () {
-    //         clickableTopic.parentElement.classList.toggle('is-active-topic');
-    //     });
-    // });
-    // //меняем классы по клику Tablet
-    // let allClickableTopicsTablet = topicsCheckboxesAppenderTablet.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
-    // allClickableTopicsTablet.forEach(clickableTopic => {
-    //     clickableTopic.addEventListener('mousedown', function () {
-    //         clickableTopic.parentElement.classList.toggle('is-active-topic');
-    //     });
-    // });
-    // let find true checkboxes
-    let allTrueCheckboxes = document.querySelectorAll('.mirror-element-true .blog-articles-filter-and-search_radio-button-field');
-    //зеркалим клики PC
-    let allFalseCheckboxesPC = document.querySelectorAll('.blog-articles-full-list_topics-appender .blog-articles-filter-and-search_radio-button-field');
-    allFalseCheckboxesPC.forEach((checkBox__false, idFalse) => {
-        checkBox__false.addEventListener('mousedown', function() {
-            allTrueCheckboxes[idFalse].click();
-        });
-    });
-    //зеркалим клики Tablet
-    let allFalseCheckboxesTablet = document.querySelectorAll('.filter-and-search-mob_category-dropdown-list-inner.is-topic .blog-articles-filter-and-search_radio-button-field');
-
-    allFalseCheckboxesTablet.forEach((checkBox__false, idFalse) => {
-        checkBox__false.addEventListener('mousedown', function () {
-            allTrueCheckboxes[idFalse].click();
-        });
-    });
-
-
-    //следим за инпутом
-    let allFilterButtons = document.querySelectorAll('.blog-articles-filter-and-search_radio-button-field');
-
-    allFilterButtons.forEach(el => {
-        el.addEventListener('mousedown', function () {
-            document.getElementById('blog-filter').scrollIntoView();
-        });
-    });
-
-    let searchingFilter = document.querySelector('.blog-articles-filter-and-search_input');
-    searchingFilter.addEventListener('change', function () {
-        document.getElementById('blog-filter').scrollIntoView();
-
-    });
-
-    document.addEventListener('keyup', function () {
-        document.getElementById('blog-filter').scrollIntoView();
-
-    });
-
-
-    //работаем с мобильной версией категорий в дродавне
-    //клонирууем чекбоксы
-    let categoriesWrapper = document.querySelector('.mirror-element-true_categories');
-    let clone_categoriesWrapper = categoriesWrapper.cloneNode(true);
-    clone_categoriesWrapper.classList.remove('mirror-element-true_categories');
-    clone_categoriesWrapper.classList.add('mirror-element-false_categories');
-    let categoriesAppender = document.querySelector('.filter-and-search-mob_category-dropdown-list-inner.is-category');
-    categoriesAppender.append(clone_categoriesWrapper);
-    //меняем классы по клику
-    // let allClickableCategories = categoriesAppender.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
-    // allClickableCategories.forEach(clickableCategory => {
-    //      clickableCategory.addEventListener('click', function () {
-    //          document.querySelector('.filter-and-search-mob_category-dropdown-text.is-category').textContent = clickableCategory.textContent;
-    //          allClickableCategories.forEach(el => {
-    //              el.parentElement.classList.remove('is-active');
-    //          });
-    //          clickableCategory.parentElement.classList.add('is-active');
-    //      });
-    // });
-    //зеркалим клики
-    let allTrueCategories = document.querySelectorAll('.mirror-element-true_categories .blog-articles-filter-and-search_radio-button-field');
-    let allFalseCategories = document.querySelectorAll('.mirror-element-false_categories .blog-articles-filter-and-search_radio-button-field');
-
-    allFalseCategories.forEach((checkBox__false, idFalse) => {
-         checkBox__false.addEventListener('mousedown', function () {
-             allTrueCategories[idFalse].click();
-         });
-     });
 }
 
 function startAfterMutationObserver() {
@@ -203,17 +103,17 @@ array__mutationIndicators.forEach(el__mutationIndicators => {
 function syncFilters () {
     //нужно определить список тегов как src of true 
     //и определить список тегов как src of false
-    let allTrue__categoryTags = document.querySelectorAll('.mirror-element-true_categories .blog-articles-filter-and-search_radio-button-text.is-category');
-    let allFalse__categoryTags = document.querySelectorAll('.filter-and-search-mob_category-button .blog-articles-filter-and-search_radio-button-text');
+    // let allTrue__categoryTags = document.querySelectorAll('.mirror-element-true_categories .blog-articles-filter-and-search_radio-button-text.is-category');
+    // let allFalse__categoryTags = document.querySelectorAll('.filter-and-search-mob_category-button .blog-articles-filter-and-search_radio-button-text');
 
-    allTrue__categoryTags.forEach((true__categoryTag, id__categoryTag) => {
-        if(true__categoryTag.classList.contains('is-active') == true) {
-            allFalse__categoryTags.forEach(fasle__categoryTag => {
-                fasle__categoryTag.classList.remove('is-active');
-            });
-            allFalse__categoryTags[id__categoryTag].parentElement.classList.add('is-active');
-        }
-    });
+    // allTrue__categoryTags.forEach((true__categoryTag, id__categoryTag) => {
+    //     if(true__categoryTag.classList.contains('is-active') == true) {
+    //         allFalse__categoryTags.forEach(fasle__categoryTag => {
+    //             fasle__categoryTag.classList.remove('is-active');
+    //         });
+    //         allFalse__categoryTags[id__categoryTag].parentElement.classList.add('is-active');
+    //     }
+    // });
 }
 
 //создаем новую мутацию, чтобы следить за изменением в кнопках фильтров
