@@ -91,19 +91,19 @@ function startAfterTagsPrepare() {
     //tablet version
     topicsCheckboxesAppenderTablet.append(clone_topicsCheckboxesWrapperTablet);
     //меняем классы по клику PC
-    let allClickableTopicsPc = topicsCheckboxesAppenderPc.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
-    allClickableTopicsPc.forEach(clickableTopic => {
-        clickableTopic.addEventListener('mousedown', function () {
-            clickableTopic.parentElement.classList.toggle('is-active-topic');
-        });
-    });
-    //меняем классы по клику Tablet
-    let allClickableTopicsTablet = topicsCheckboxesAppenderTablet.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
-    allClickableTopicsTablet.forEach(clickableTopic => {
-        clickableTopic.addEventListener('mousedown', function () {
-            clickableTopic.parentElement.classList.toggle('is-active-topic');
-        });
-    });
+    // let allClickableTopicsPc = topicsCheckboxesAppenderPc.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
+    // allClickableTopicsPc.forEach(clickableTopic => {
+    //     clickableTopic.addEventListener('mousedown', function () {
+    //         clickableTopic.parentElement.classList.toggle('is-active-topic');
+    //     });
+    // });
+    // //меняем классы по клику Tablet
+    // let allClickableTopicsTablet = topicsCheckboxesAppenderTablet.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
+    // allClickableTopicsTablet.forEach(clickableTopic => {
+    //     clickableTopic.addEventListener('mousedown', function () {
+    //         clickableTopic.parentElement.classList.toggle('is-active-topic');
+    //     });
+    // });
     //let find true checkboxes
     let allTrueCheckboxes = document.querySelectorAll('.mirror-element-true .blog-articles-filter-and-search_radio-button-field');
     //зеркалим клики PC
@@ -153,16 +153,16 @@ function startAfterTagsPrepare() {
     let categoriesAppender = document.querySelector('.filter-and-search-mob_category-dropdown-list-inner.is-category');
     categoriesAppender.append(clone_categoriesWrapper);
     //меняем классы по клику
-    let allClickableCategories = categoriesAppender.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
-    allClickableCategories.forEach(clickableCategory => {
-         clickableCategory.addEventListener('click', function () {
-             document.querySelector('.filter-and-search-mob_category-dropdown-text.is-category').textContent = clickableCategory.textContent;
-             allClickableCategories.forEach(el => {
-                 el.parentElement.classList.remove('is-active');
-             });
-             clickableCategory.parentElement.classList.add('is-active');
-         });
-    });
+    // let allClickableCategories = categoriesAppender.querySelectorAll('.blog-articles-filter-and-search_radio-button-text');
+    // allClickableCategories.forEach(clickableCategory => {
+    //      clickableCategory.addEventListener('click', function () {
+    //          document.querySelector('.filter-and-search-mob_category-dropdown-text.is-category').textContent = clickableCategory.textContent;
+    //          allClickableCategories.forEach(el => {
+    //              el.parentElement.classList.remove('is-active');
+    //          });
+    //          clickableCategory.parentElement.classList.add('is-active');
+    //      });
+    // });
     //зеркалим клики
     let allTrueCategories = document.querySelectorAll('.mirror-element-true_categories .blog-articles-filter-and-search_radio-button-field');
     let allFalseCategories = document.querySelectorAll('.mirror-element-false_categories .blog-articles-filter-and-search_radio-button-field');
