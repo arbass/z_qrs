@@ -12,6 +12,7 @@
 //|webflow| 4. Найдите ближайший родительский элемент, который является collection list item и дайте ему аттрибут hidden-tags-counter="main-parent"
 //|webflow| 5. Подготовьте dropdown элемент, в котором мы будем отображать количество скрытых тэгов и при наведении мы будем показывать остальные 
 //|webflow| дайте ему аттрибут hidden-tags-counter="additional-tags" и дайте ему класс "hide"
+//|webflow| в dropdown элементе у вас будет враппер, который будет ожидать в себя тэги, дайте ему аттрибут hidden-tags-counter="rest-tags-appender"
 //|webflow| 6. Дайте clw аттрибут, который будет помогать наблюдать за мутациями hidden-tags-counter="mutation-observer"
 
 
@@ -55,8 +56,6 @@ function ht__showTags() {
                         tag.classList.add('hide');
                     });
                     while (ht__interator < ht__countOfVisibleTags) {
-                        // console.log('итератор равен = ' + ht__interator);
-                        // console.log('поэтоу раскрываем этот элемент –> ' + allCurrentTags[ht__interator]);
                         if (allCurrentTags[ht__interator] != undefined) {
                             allCurrentTags[ht__interator].classList.remove('hide');
                         }
@@ -75,8 +74,14 @@ function ht__showTags() {
                     currentTagCounter.firstChild.firstChild.textContent = ('+' + countOfHiddenTagsLength);
                     if (countOfHiddenTagsLength > 0) {
                         currentTagCounter.classList.remove('hide');
-                        console.log(currentTagCounter);
                         countOfHiddenTags[countOfHiddenTagsLength-1].after(currentTagCounter);
+                        //а тут мы переместим все скрытые тэги в нужное место и снимем с них класс hide
+                        // countOfHiddenTags.forEach(tag => {
+                        //     let currentRestTagAppender = el__card.querySelector('[hidden-tags-counter="rest-tags-appender"]');
+                        //     currentRestTagAppender.appendChild(tag);
+                        //     tag.classList.remove('hide');
+                        // });
+
                     }
             });
 
