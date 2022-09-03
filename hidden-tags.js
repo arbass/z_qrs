@@ -21,9 +21,9 @@
 let ht__allMutatuinClw = document.querySelectorAll('[hidden-tags-counter="mutation-observer"]');
 let ht__mutationTimer;
 let ht__status = false;
-ht__allMutatuinClw.forEach(el => {
+ht__allMutatuinClw.forEach(el__clw => {
     // Выбираем целевой элемент
-    let ht__target = el;
+    let ht__target = el__clw;
     // Конфигурация observer (за какими изменениями наблюдать)
     const ht__config = {
         attributes: true,
@@ -44,13 +44,13 @@ function ht__showTags() {
         ht__mutationTimer = setTimeout(() => {
             ht__status = true;
             let ht__allTagsParents = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
-                ht__allTagsParents.forEach(el => {                    
+                ht__allTagsParents.forEach(el__card => {                    
                     let ht__interator = 0;
-                    let ht__countOfVisibleTags = el.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
+                    let ht__countOfVisibleTags = el__card.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
                     //переводим ht__countOfVisibleTags в число
                     ht__countOfVisibleTags = Number(ht__countOfVisibleTags);
                     //теперь для всех тэгов, кроме первых ht__countOfVisibleTags, добавим класс hide
-                    let allCurrentTags = el.querySelectorAll('[hidden-tags-counter="tag"]');
+                    let allCurrentTags = el__card.querySelectorAll('[hidden-tags-counter="tag"]');
                     allCurrentTags.forEach(tag => {
                         tag.classList.add('hide');
                     });
@@ -63,7 +63,7 @@ function ht__showTags() {
                         ht__interator++;
                     }
                     //перед началом работы скрипта убедимся, что у обёртки тэгов всё ещё нет сласса opacity-full
-                    let currentTagWrapper = el.querySelector('[hidden-tags-counter="tags-wrapper"]');
+                    let currentTagWrapper = el__card.querySelector('[hidden-tags-counter="tags-wrapper"]');
                     if (currentTagWrapper.classList.contains('opacity-full') == false) {
                         //самое последние действие — выводи обёртку с тэгами из опасити
                         currentTagWrapper.classList.add('opacity-full');
