@@ -75,6 +75,8 @@ function ht__showTags() {
                     currentTagCounter.firstChild.firstChild.textContent = ('+' + countOfHiddenTagsLength);
                     if (countOfHiddenTagsLength > 0) {
                         currentTagCounter.classList.remove('hide');
+                        console.log(currentTagCounter);
+                        countOfHiddenTags[countOfHiddenTagsLength-1].after(currentTagCounter);
                     }
             });
 
