@@ -8,10 +8,10 @@
 //|webflow| также в css добавить класс .opacity-full {opacity: 1;}
 //|webflow| после того как скрипт закончит работу, он добавит класс .opacity-full к родительскому элементу и покажет все теги
 //|webflow| 3. Для этого же элемента с аттрибутом hidden-tags-counter="tags-wrapper" укажите максимальное количество тэгов, которые должны отображаться,
-//|webflow| например hidden-tags-counter-max="2", если не укажите — скрипт сломается :) 
+//|webflow| например hidden-tags-counter-max="2", если не укажите — скрипт сломается
 //|webflow| 4. Найдите ближайший родительский элемент, который является collection list item и дайте ему аттрибут hidden-tags-counter="main-parent"
 //|webflow| 5. Подготовьте dropdown элемент, в котором мы будем отображать количество скрытых тэгов и при наведении мы будем показывать остальные 
-//|webflow| дайте ему аттрибут hidden-tags-counter="additional-tags"
+//|webflow| дайте ему аттрибут hidden-tags-counter="additional-tags" и дайте ему класс "hide"
 //|webflow| 6. Дайте clw аттрибут, который будет помогать наблюдать за мутациями hidden-tags-counter="mutation-observer"
 
 
@@ -68,8 +68,14 @@ function ht__showTags() {
                         //самое последние действие — выводи обёртку с тэгами из опасити
                         currentTagWrapper.classList.add('opacity-full');
                     }
-
-                    // console.log('конец карточки––––––––––––––––––––––––');
+                    let countOfHiddenTags = el__card.querySelectorAll('[hidden-tags-counter="tag"].hide');
+                    let countOfHiddenTagsLength = countOfHiddenTags.length;
+                    //тут мы переместим счётчик скрытых тэгов в нужное место
+                    let currentTagCounter = el__card.querySelector('[hidden-tags-counter="additional-tags"]');
+                    currentTagCounter.firstChild.firstChild.textContent = ('+' + countOfHiddenTagsLength);
+                    if (countOfHiddenTagsLength > 0) {
+                        currentTagCounter.classList.remove('hide');
+                    }
             });
 
             setTimeout(() => {
