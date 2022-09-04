@@ -20,22 +20,29 @@
 
 
 //⭐️ Точка входа
-let ht__allMutatuinClw = document.querySelectorAll('[hidden-tags-counter="mutation-observer"]');
-let ht__mutationTimer;
-let ht__finsweetStatus = false;
+let ht__allMutatuinClw = document.querySelectorAll('[ht-mutation-observer="clw"]');
+let ht__finsweetNestStatus = false;
+let ht__finsweetNestStatusTimer;
+let ht__observer;
+console.log(ht__finsweetNestStatusTimer);
+
+//––––––––––––––––––––––––––––––––––––––
 ht__allMutatuinClw.forEach(el__clw => {
-    // Выбираем целевой элемент
     let ht__target = el__clw;
-    // Конфигурация observer (за какими изменениями наблюдать)
     const ht__config = {
         attributes: true,
         childList: true,
         subtree: true
     };
-    // Создаём экземпляр наблюдателя с указанной функцией колбэка
-    const ht__observer = new MutationObserver(ht__showTags);
-    // Начинаем наблюдение за настроенными изменениями целевого элемента
+    ht__observer = new MutationObserver(ht__finsweetNestStatusChecking);
     ht__observer.observe(ht__target, ht__config);
 });
 
-//Запуск основной функции, после того как finsweetNest отработал
+function ht__finsweetNestStatusChecking() {
+    clearTimeout(ht__finsweetNestStatusTimer);
+    ht__finsweetNestStatusTimer = setTimeout(() => {
+        console.log('⭐️ ⭐️ ⭐️ мутации закончились –––> можно запускать следующую функцию');
+        ht__observer.disconnect();
+        ht__finsweetNestStatus = true;
+    }, 200);
+}
