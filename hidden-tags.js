@@ -84,6 +84,14 @@ function ht__showTags() {
                             currentRestTagAppender.appendChild(tag);
                             tag.classList.remove('hide');
                         });
+                        //
+                        setTimeout(function() {
+                            window.Webflow && window.Webflow.destroy();
+                            window.Webflow && window.Webflow.ready();
+                            window.Webflow && window.Webflow.require( 'ix2' ).init();
+                            document.dispatchEvent( new Event( 'readystatechange' ) );
+                        } , 500);
+                        //
 
                     }
             });
