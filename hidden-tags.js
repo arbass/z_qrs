@@ -52,7 +52,10 @@ let ht__showTagsTrottlingTimer;
 function ht__showTags() {
     clearTimeout(ht__showTagsTrottlingTimer);
     ht__showTagsTrottlingTimer = setTimeout(function(){
-        console.log('ht__showTags()');
+        ht__listOfDynamicItems = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
+        ht__listOfDynamicItems.forEach(ht__dynamicItems => {
+            console.log(ht__dynamicItems);
+        });
     }, 200);
 };
 //> Функция для работы с тэгами (конец)
@@ -73,10 +76,10 @@ function ht__showTags() {
 //
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //< События при которых мы запускаем функцию ht__showTags() (начало)
-document.querySelector('body').addEventListener('mousedown', ht__showTags);
-document.querySelector('body').addEventListener('mouseup', ht__showTags);
-document.querySelector('body').addEventListener('touchstart', ht__showTags);
-document.querySelector('body').addEventListener('touchend', ht__showTags);
+// document.querySelector('body').addEventListener('mousedown', ht__showTags);
+// document.querySelector('body').addEventListener('mouseup', ht__showTags);
+// document.querySelector('body').addEventListener('touchstart', ht__showTags);
+// document.querySelector('body').addEventListener('touchend', ht__showTags);
 let ht__listOfInputs = document.querySelectorAll('[hidden-tags-counter="input"]');
 ht__listOfInputs.forEach(ht__input => {
     ht__input.addEventListener('keydown', ht__showTags);
