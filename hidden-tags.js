@@ -18,10 +18,11 @@
 
 
 
-//⭐️ Entry point[java script] Ищем все CLW, в которых будут мутации
+
+//⭐️ Точка входа
 let ht__allMutatuinClw = document.querySelectorAll('[hidden-tags-counter="mutation-observer"]');
 let ht__mutationTimer;
-let ht__status = false;
+let ht__finsweetStatus = false;
 ht__allMutatuinClw.forEach(el__clw => {
     // Выбираем целевой элемент
     let ht__target = el__clw;
@@ -37,68 +38,4 @@ ht__allMutatuinClw.forEach(el__clw => {
     ht__observer.observe(ht__target, ht__config);
 });
 
-
-//[java script] Найдём все родительские элементы с тэгом hidden-tags-counter="tags-wrapper" 
-function ht__showTags() {
-    clearTimeout(ht__mutationTimer);
-    if (ht__status == false) {
-        ht__mutationTimer = setTimeout(() => {
-            ht__status = true;
-            let ht__allTagsParents = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
-                ht__allTagsParents.forEach(el__card => {    
-                    let ht__interator = 0;
-                    let ht__countOfVisibleTags = el__card.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
-                    //переводим ht__countOfVisibleTags в число
-                    ht__countOfVisibleTags = Number(ht__countOfVisibleTags);
-                    //теперь для всех тэгов, кроме первых ht__countOfVisibleTags, добавим класс hide
-                    let allCurrentTags = el__card.querySelectorAll('[hidden-tags-counter="tag"]');
-                    allCurrentTags.forEach(tag => {
-                        tag.classList.add('hide');
-                    });
-                    while (ht__interator < ht__countOfVisibleTags) {
-                        if (allCurrentTags[ht__interator] != undefined) {
-                            allCurrentTags[ht__interator].classList.remove('hide');
-                        }
-                        ht__interator++;
-                    }
-                    //перед началом работы скрипта убедимся, что у обёртки тэгов всё ещё нет сласса opacity-full
-                    let currentTagWrapper = el__card.querySelector('[hidden-tags-counter="tags-wrapper"]');
-                    if (currentTagWrapper.classList.contains('opacity-full') == false) {
-                        //самое последние действие — выводи обёртку с тэгами из опасити
-                        currentTagWrapper.classList.add('opacity-full');
-                    }
-                    let countOfHiddenTags = el__card.querySelectorAll('[hidden-tags-counter="tag"].hide');
-                    let countOfVisibleTags = el__card.querySelectorAll('[hidden-tags-counter="tag"]:not(.hide)');
-                    let currentTagsWrapper = countOfVisibleTags[0].parentNode;
-                    let countOfHiddenTagsLength = countOfHiddenTags.length;
-                    //тут мы переместим счётчик скрытых тэгов в нужное место
-                    let currentTagCounter = el__card.querySelector('[hidden-tags-counter="additional-tags"]');
-                    currentTagCounter.firstChild.firstChild.textContent = ('+' + countOfHiddenTagsLength);
-                    if (countOfHiddenTagsLength > 0) {
-                        currentTagCounter.classList.remove('hide');
-                        // countOfHiddenTags[countOfHiddenTagsLength-1].after(currentTagCounter);
-                        currentTagsWrapper.appendChild(currentTagCounter);
-                        //а тут мы переместим все скрытые тэги в нужное место и снимем с них класс hide
-                        countOfHiddenTags.forEach(tag => {
-                            let currentRestTagAppender = el__card.querySelector('[hidden-tags-counter="rest-tags-appender"]');
-                            currentRestTagAppender.appendChild(tag);
-                            tag.classList.remove('hide');
-                        });
-                        //
-                        setTimeout(function() {
-                            window.Webflow && window.Webflow.destroy();
-                            window.Webflow && window.Webflow.ready();
-                            window.Webflow && window.Webflow.require( 'ix2' ).init();
-                            document.dispatchEvent( new Event( 'readystatechange' ) );
-                        } , 500);
-                        //
-
-                    }
-            });
-
-            setTimeout(() => {
-                ht__status = false;
-            }, 550); //возможно стоить уменьшить эти значения
-        }, 500);//возможно стоить уменьшить эти значения
-    }
-};
+//Запуск основной функции, после того как finsweetNest отработал
