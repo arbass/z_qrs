@@ -45,7 +45,7 @@ function ht__showTags() {
         ht__mutationTimer = setTimeout(() => {
             ht__status = true;
             let ht__allTagsParents = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
-                ht__allTagsParents.forEach(el__card => {                    
+                ht__allTagsParents.forEach(el__card => {    
                     let ht__interator = 0;
                     let ht__countOfVisibleTags = el__card.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
                     //переводим ht__countOfVisibleTags в число
@@ -68,26 +68,29 @@ function ht__showTags() {
                         currentTagWrapper.classList.add('opacity-full');
                     }
                     let countOfHiddenTags = el__card.querySelectorAll('[hidden-tags-counter="tag"].hide');
+                    let countOfVisibleTags = el__card.querySelectorAll('[hidden-tags-counter="tag"]:not(.hide)');
+                    let currentTagsWrapper = countOfVisibleTags[0].parentNode;
                     let countOfHiddenTagsLength = countOfHiddenTags.length;
                     //тут мы переместим счётчик скрытых тэгов в нужное место
                     let currentTagCounter = el__card.querySelector('[hidden-tags-counter="additional-tags"]');
                     currentTagCounter.firstChild.firstChild.textContent = ('+' + countOfHiddenTagsLength);
                     if (countOfHiddenTagsLength > 0) {
                         currentTagCounter.classList.remove('hide');
-                        countOfHiddenTags[countOfHiddenTagsLength-1].after(currentTagCounter);
+                        // countOfHiddenTags[countOfHiddenTagsLength-1].after(currentTagCounter);
+                        currentTagsWrapper.appendChild(currentTagCounter);
                         //а тут мы переместим все скрытые тэги в нужное место и снимем с них класс hide
-                        // countOfHiddenTags.forEach(tag => {
-                        //     let currentRestTagAppender = el__card.querySelector('[hidden-tags-counter="rest-tags-appender"]');
-                        //     currentRestTagAppender.appendChild(tag);
-                        //     tag.classList.remove('hide');
-                        // });
+                        countOfHiddenTags.forEach(tag => {
+                            let currentRestTagAppender = el__card.querySelector('[hidden-tags-counter="rest-tags-appender"]');
+                            currentRestTagAppender.appendChild(tag);
+                            tag.classList.remove('hide');
+                        });
 
                     }
             });
 
             setTimeout(() => {
                 ht__status = false;
-            }, 350);
-        }, 300);
+            }, 550); //возможно стоить уменьшить эти значения
+        }, 500);//возможно стоить уменьшить эти значения
     }
 };
