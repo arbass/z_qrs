@@ -1,31 +1,23 @@
 //⭐️ Точка входа
-let ht__listMutationStartedElements = document.querySelectorAll('[ht-mutation-observer="clw"]');
-let ht__listStartedObservers = new Array();
-let ht__timerFinsweetNestStatus;
+let ht__listOfTagsWrapper = document.querySelectorAll('[hidden-tags-counter="tags-wrapper"]');
+let ht__entryPointCounter = 0;
+let ht__entryPointCounterTimer;
 
-//––––––––––––––––––––––––––––––––––––––
-let k = 'ht__observer';
-let i = 0;
-for(i = 0; i < ht__listMutationStartedElements.length; i++) {
-    let ht__target = ht__listMutationStartedElements[i];
-    const ht__config = {
-        attributes: true,
-        childList: true,
-        subtree: true
-    };
-    eval('var ' + k + i + '= new MutationObserver(ht__finsweetNestStatusChecking);');
-    eval('ht__observer' + i + '.observe(ht__target, ht__config);');
-    ht__listStartedObservers.push(eval('ht__observer' + i));
+function ht__finsweetNestStatusChecker() {
+    ht__listOfTagsWrapper.forEach(ht__tagWrapper => {
+        let ht__currentTagsClw = ht__tagWrapper.querySelector('[hidden-tags-counter="clonable-clw"]');
+        if (ht__currentTagsClw == null) {
+            clearTimeout(ht__entryPointCounterTimer);
+            ht__entryPointCounterTimer = setTimeout(ht__finsweetNestStatusChecker, 100);
+        } else {
+            while (ht__entryPointCounter < ht__listOfTagsWrapper.length) {
+                ht__entryPointCounter++;
+            }
+        }
+    });
+    if (ht__entryPointCounter == ht__listOfTagsWrapper.length) {
+        console.log(ht__entryPointCounter + ' == ' + ht__listOfTagsWrapper.length);
+    }
 }
 
-
-function ht__finsweetNestStatusChecking () {
-    console.log('мутации идут');
-    clearTimeout(ht__timerFinsweetNestStatus);
-    ht__timerFinsweetNestStatus = setTimeout(function() {
-        ht__listStartedObservers.forEach(observer => {
-            observer.disconnect();
-        });  
-        console.log('мутации закончились ⭐️⭐️⭐️ можно запускать основную функцию');
-    }, 50);
-}    
+ht__finsweetNestStatusChecker();
