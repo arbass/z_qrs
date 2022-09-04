@@ -28,7 +28,7 @@ function ht__finsweetNestStatusChecker() {
         ht__showTags();
     }
 }
-
+//запуск основной функции, при загрузке страницы
 ht__finsweetNestStatusChecker();
 //⭐️ Точка входа (конец)
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -39,75 +39,56 @@ ht__finsweetNestStatusChecker();
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//👀 Функция для работы с тэгами (начало)
-
-let ht__allMutatuinClw = document.querySelectorAll('[hidden-tags-counter="mutation-observer"]');
-let ht__mutationTimer;
-let ht__status = false;
-
+//< Функция для работы с тэгами (начало)
+let ht__showTagsTrottlingTimer;
 function ht__showTags() {
-    clearTimeout(ht__mutationTimer);
-    if (ht__status == false) {
-        ht__mutationTimer = setTimeout(() => {
-            ht__status = true;
-            let ht__allTagsParents = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
-                ht__allTagsParents.forEach(el__card => {    
-                    let ht__interator = 0;
-                    let ht__countOfVisibleTags = el__card.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
-                    //переводим ht__countOfVisibleTags в число
-                    ht__countOfVisibleTags = Number(ht__countOfVisibleTags);
-                    //теперь для всех тэгов, кроме первых ht__countOfVisibleTags, добавим класс hide
-                    let allCurrentTags = el__card.querySelectorAll('[hidden-tags-counter="tag"]');
-                    allCurrentTags.forEach(tag => {
-                        tag.classList.add('hide');
-                    });
-                    while (ht__interator < ht__countOfVisibleTags) {
-                        if (allCurrentTags[ht__interator] != undefined) {
-                            allCurrentTags[ht__interator].classList.remove('hide');
-                        }
-                        ht__interator++;
-                    }
-                    //перед началом работы скрипта убедимся, что у обёртки тэгов всё ещё нет сласса opacity-full
-                    let currentTagWrapper = el__card.querySelector('[hidden-tags-counter="tags-wrapper"]');
-                    if (currentTagWrapper.classList.contains('opacity-full') == false) {
-                        //самое последние действие — выводи обёртку с тэгами из опасити
-                        currentTagWrapper.classList.add('opacity-full');
-                    }
-                    let countOfHiddenTags = el__card.querySelectorAll('[hidden-tags-counter="tag"].hide');
-                    let countOfVisibleTags = el__card.querySelectorAll('[hidden-tags-counter="tag"]:not(.hide)');
-                    let currentTagsWrapper = countOfVisibleTags[0].parentNode;
-                    let countOfHiddenTagsLength = countOfHiddenTags.length;
-                    //тут мы переместим счётчик скрытых тэгов в нужное место
-                    let currentTagCounter = el__card.querySelector('[hidden-tags-counter="additional-tags"]');
-                    currentTagCounter.firstChild.firstChild.textContent = ('+' + countOfHiddenTagsLength);
-                    if (countOfHiddenTagsLength > 0) {
-                        currentTagCounter.classList.remove('hide');
-                        // countOfHiddenTags[countOfHiddenTagsLength-1].after(currentTagCounter);
-                        currentTagsWrapper.appendChild(currentTagCounter);
-                        //а тут мы переместим все скрытые тэги в нужное место и снимем с них класс hide
-                        countOfHiddenTags.forEach(tag => {
-                            let currentRestTagAppender = el__card.querySelector('[hidden-tags-counter="rest-tags-appender"]');
-                            currentRestTagAppender.appendChild(tag);
-                            tag.classList.remove('hide');
-                        });
-                        //
-                        setTimeout(function() {
-                            window.Webflow && window.Webflow.destroy();
-                            window.Webflow && window.Webflow.ready();
-                            window.Webflow && window.Webflow.require( 'ix2' ).init();
-                            document.dispatchEvent( new Event( 'readystatechange' ) );
-                        } , 500);
-                        //
-
-                    }
-            });
-
-            setTimeout(() => {
-                ht__status = false;
-            }, 100); //возможно стоить уменьшить эти значения
-        }, 50);//возможно стоить уменьшить эти значения
-    }
+    clearTimeout(ht__showTagsTrottlingTimer);
+    ht__showTagsTrottlingTimer = setTimeout(function(){
+        console.log('ht__showTags()');
+    }, 200);
 };
-//👀 Функция для работы с тэгами (конец)
+//> Функция для работы с тэгами (конец)
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//< События при которых мы запускаем функцию ht__showTags() (начало)
+document.querySelector('body').addEventListener('mousedown', ht__showTags);
+document.querySelector('body').addEventListener('mouseup', ht__showTags);
+document.querySelector('body').addEventListener('touchstart', ht__showTags);
+document.querySelector('body').addEventListener('touchend', ht__showTags);
+let ht__listOfInputs = document.querySelectorAll('[hidden-tags-counter="input"]');
+ht__listOfInputs.forEach(ht__input => {
+    ht__input.addEventListener('keydown', ht__showTags);
+});
+//Мутации в форме с кнопками фильтра
+var ht__target = document.querySelector('[ht-mutation-observer="form"]');
+const ht__config = {
+    attributes: true,
+    childList: true,
+    subtree: true
+};
+const ht__observer = new MutationObserver(ht__showTags);
+ht__observer.observe(ht__target, ht__config);
+//> События при которых мы запускаем функцию ht__showTags() (конец)
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
