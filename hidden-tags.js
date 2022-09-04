@@ -54,7 +54,8 @@ function ht__showTags() {
     ht__showTagsTrottlingTimer = setTimeout(function(){
         ht__listOfDynamicItems = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
         ht__listOfDynamicItems.forEach(ht__dynamicItems => {
-            console.log(ht__dynamicItems);
+            let ht__currentTagWrapper = ht__dynamicItems.querySelector('[hidden-tags-counter="tags-wrapper"]');
+            ht__currentTagWrapper.classList.add('opacity-full');
         });
     }, 200);
 };
@@ -80,6 +81,7 @@ function ht__showTags() {
 // document.querySelector('body').addEventListener('mouseup', ht__showTags);
 // document.querySelector('body').addEventListener('touchstart', ht__showTags);
 // document.querySelector('body').addEventListener('touchend', ht__showTags);
+document.querySelector('[hidden-tags-counter="load-more"]').addEventListener('click', ht__showTags);
 let ht__listOfInputs = document.querySelectorAll('[hidden-tags-counter="input"]');
 ht__listOfInputs.forEach(ht__input => {
     ht__input.addEventListener('keydown', ht__showTags);
