@@ -21,28 +21,29 @@
 
 //⭐️ Точка входа
 let ht__allMutatuinClw = document.querySelectorAll('[ht-mutation-observer="clw"]');
-let ht__finsweetNestStatus = false;
 let ht__finsweetNestStatusTimer;
-let ht__observer;
+// let ht__observer;
 console.log(ht__finsweetNestStatusTimer);
 
 //––––––––––––––––––––––––––––––––––––––
-ht__allMutatuinClw.forEach(el__clw => {
-    let ht__target = el__clw;
-    const ht__config = {
-        attributes: true,
-        childList: true,
-        subtree: true
-    };
-    ht__observer = new MutationObserver(ht__finsweetNestStatusChecking);
-    ht__observer.observe(ht__target, ht__config);
-});
+
+let ht__target = ht__allMutatuinClw;
+const ht__config = {
+    attributes: true,
+    childList: true,
+    subtree: true
+};
+const ht__observer = new MutationObserver(ht__finsweetNestStatusChecking);
+ht__observer.observe(ht__target, ht__config);
+
 
 function ht__finsweetNestStatusChecking() {
     clearTimeout(ht__finsweetNestStatusTimer);
     ht__finsweetNestStatusTimer = setTimeout(() => {
         console.log('⭐️ ⭐️ ⭐️ мутации закончились –––> можно запускать следующую функцию');
-        ht__observer.disconnect();
-        ht__finsweetNestStatus = true;
-    }, 200);
+        ht__tagsPreparing();
+    }, 2000);
+}
+
+function ht__tagsPreparing() {
 }
