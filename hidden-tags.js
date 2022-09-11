@@ -69,6 +69,18 @@ function ht__showTags() {
             ht__currentTagFirst.before(ht__currentCategoryTag);
             }
 
+            // Определяем количество нужных тэгов и ненужные скрываем в тултипе
+            let ht__currentCountOfTags = ht__dynamicItems.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
+            ht__currentCountOfTags = Number(ht__currentCountOfTags);
+            let ht__currentNestTags = ht__dynamicItems.querySelectorAll('[hidden-tags-counter="tag"]');
+
+            ht__currentNestTags.forEach((ht__currentNestTag, ht__currentNestTagId) => {
+                console.log((ht__currentNestTagId + 1) > ht__currentCountOfTags);
+                if ((ht__currentNestTagId+1) > ht__currentCountOfTags) {
+                    ht__currentNestTag.classList.add('hide');
+                }                
+            });
+
             //говорим о том, что карточка уже обработана
             ht__dynamicItems.setAttribute('ht-status', 'true')
         });
