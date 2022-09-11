@@ -52,12 +52,28 @@ let ht__showTagsTrottlingTimer;
 function ht__showTags() {
     clearTimeout(ht__showTagsTrottlingTimer);
     ht__showTagsTrottlingTimer = setTimeout(function(){
+        // Делаем видимым тэг с тултипом
         ht__listOfDynamicItems = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
         ht__listOfDynamicItems.forEach(ht__dynamicItems => {
+            if (ht__dynamicItems.getAttribute('ht-status') != 'true') {
+            let ht__currentTooltipButton = ht__dynamicItems.querySelector('.additional-tags');
+            let ht__currentNestTagsWrapper = ht__dynamicItems.querySelector('[fs-cmsnest-collection="article-topics"]');
             let ht__currentTagWrapper = ht__dynamicItems.querySelector('[hidden-tags-counter="tags-wrapper"]');
             ht__currentTagWrapper.classList.add('opacity-full');
+            let ht__currentTagLast = ht__currentNestTagsWrapper.lastChild;
+            ht__currentTagLast.after(ht__currentTooltipButton);
+            
+            // Перемещаем основную категорий в начало списка
+            let ht__currentCategoryTag = ht__dynamicItems.querySelector('.is-current-card-category');
+            let ht__currentTagFirst = ht__currentNestTagsWrapper.firstChild;
+            ht__currentTagFirst.before(ht__currentCategoryTag);
+            }
+
+            //говорим о том, что карточка уже обработана
+            ht__dynamicItems.setAttribute('ht-status', 'true')
         });
-    }, 200);
+
+    }, 300);
 };
 //> Функция для работы с тэгами (конец)
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
