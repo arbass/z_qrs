@@ -67,19 +67,27 @@ function ht__showTags() {
             let ht__currentCategoryTag = ht__dynamicItems.querySelector('.is-current-card-category');
             let ht__currentTagFirst = ht__currentNestTagsWrapper.firstChild;
             ht__currentTagFirst.before(ht__currentCategoryTag);
-            }
 
-            // Определяем количество нужных тэгов и ненужные скрываем в тултипе
+
             let ht__currentCountOfTags = ht__dynamicItems.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
             ht__currentCountOfTags = Number(ht__currentCountOfTags);
             let ht__currentNestTags = ht__dynamicItems.querySelectorAll('[hidden-tags-counter="tag"]');
+            let ht__currentTooltipWaiter = ht__dynamicItems.querySelector('.additional-tags_list-wrapper');
+
+
+            // Определяем количество нужных тэгов и ненужные скрываем в тултипе
 
             ht__currentNestTags.forEach((ht__currentNestTag, ht__currentNestTagId) => {
-                console.log((ht__currentNestTagId + 1) > ht__currentCountOfTags);
                 if ((ht__currentNestTagId+1) > ht__currentCountOfTags) {
-                    ht__currentNestTag.classList.add('hide');
+                    ht__currentTooltipWaiter.append(ht__currentNestTag);
+
+                    //показываем тултип если только он нужен
+                    ht__currentTooltipButton.classList.add('opacity-full');
                 }                
             });
+            
+            }
+            ////////
 
             //говорим о том, что карточка уже обработана
             ht__dynamicItems.setAttribute('ht-status', 'true')
