@@ -150,6 +150,3 @@ const ht__observer = new MutationObserver(ht__showTags);
 ht__observer.observe(ht__target, ht__config);
 //> События при которых мы запускаем функцию ht__showTags() (конец)
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-
-console.log('hello wrold');
