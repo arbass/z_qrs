@@ -40,6 +40,11 @@ ht__finsweetNestStatusChecker();
 //
 //
 //
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//< Функция с проверкой клика (Начало)
+let lastClickedElement;
+window.addEventListener('mousedown', (e) => lastClickedElement=(e.target));
+//> Функция с проверкой клика (конец)
 //
 //
 //
@@ -53,52 +58,59 @@ let ht__showTagsTrottlingTimer;
 function ht__showTags() {
     clearTimeout(ht__showTagsTrottlingTimer);
     ht__showTagsTrottlingTimer = setTimeout(function(){
-        // Делаем видимым тэг с тултипом
         ht__listOfDynamicItems = document.querySelectorAll('[hidden-tags-counter="main-parent"]');
         ht__listOfDynamicItems.forEach(ht__dynamicItems => {
-            if (ht__dynamicItems.getAttribute('ht-status') != 'true') {
 
-                
-            let ht__currentTooltipButton = ht__dynamicItems.querySelector('.additional-tags');
-            let ht__currentNestTagsWrapper = ht__dynamicItems.querySelector('[fs-cmsnest-collection="article-topics"]');
-            let ht__currentTagWrapper = ht__dynamicItems.querySelector('[hidden-tags-counter="tags-wrapper"]');
-            ht__currentTagWrapper.classList.add('opacity-full');
-            let ht__currentTagLast = ht__currentNestTagsWrapper.lastChild;
-            ht__currentTagLast.after(ht__currentTooltipButton);
-            
-            // Перемещаем основную категорий в начало списка
-            let ht__currentCategoryTag = ht__dynamicItems.querySelector('.is-current-card-category');
-            let ht__currentTagFirst = ht__currentNestTagsWrapper.firstChild;
-            ht__currentTagFirst.before(ht__currentCategoryTag);
-
-
-            let ht__currentCountOfTags = ht__dynamicItems.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
-            ht__currentCountOfTags = Number(ht__currentCountOfTags);
+            let ht__maximumForTags = ht__dynamicItems.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
+                ht__maximumForTags = Number(ht__maximumForTags);
             let ht__currentNestTags = ht__dynamicItems.querySelectorAll('[hidden-tags-counter="tag"]');
-            let ht__currentTooltipWaiter = ht__dynamicItems.querySelector('.additional-tags_list-wrapper');
-
-
-            // Определяем количество нужных тэгов и ненужные скрываем в тултипе
-
-            ht__currentNestTags.forEach((ht__currentNestTag, ht__currentNestTagId) => {
-                if ((ht__currentNestTagId+1) > ht__currentCountOfTags) {
-                    ht__currentTooltipWaiter.append(ht__currentNestTag);
-
-                    //показываем тултип если только он нужен
-                    ht__currentTooltipButton.classList.add('opacity-full');
-                }                
+            let ht__currentNestTagsCount = ht__currentNestTags.length;
+            let ht__currentTooltipParent = ht__dynamicItems.querySelector('.additional-tags');
+            let ht__currentTagsWrapperParent = ht__dynamicItems.querySelector('.blog-articles-list_card-tags-wrapper');
+            let ht__currentTooltip = ht__dynamicItems.querySelector('.additional-tags_list-wrapper');
+            let ht__currentTooltipTextSpan = ht__currentTooltipParent.querySelector('.additional-tags_toggle-text');
+            let ht__currentTooltipCounter = 0;
+            let ht__currentLink = ht__dynamicItems.querySelector('[hidden-tags-counter="main-link"]');
+            let ht__curentTagsWrapper = ht__dynamicItems.querySelector('[hidden-tags-counter="tags-wrapper"]');
+            let ht__curentTagsWrapperLinks = ht__curentTagsWrapper.querySelectorAll('a');
+            ht__curentTagsWrapperLinks.forEach(a => {
+                a.setAttribute('href', '#');
             });
-            
 
+            if (ht__dynamicItems.getAttribute('ht-status') != 'true' && ht__currentNestTagsCount > ht__maximumForTags) {
+                //при клике на тэги или тултипы нужно прервать действие функции
+                ht__currentLink.addEventListener('click', function(e) {
+                    if (ht__curentTagsWrapper.contains(lastClickedElement)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    // console.log(lastClickedElement);
+                });
 
+                //основной движ с тэгами
+                ht__currentNestTags.forEach((ht__currentNestTag, ht__currentNestTagId) => {
+                    if ((ht__currentNestTagId+1) > ht__maximumForTags) {
+                        ht__currentTooltip.append(ht__currentNestTag);
+                        ht__currentTooltipCounter++;
+                        ht__currentTooltipTextSpan.textContent = '+' + ht__currentTooltipCounter;
+                    }
+                });
 
-
+                //и показываем скрытые тултипы
+                ht__currentTooltipParent.classList.add('opacity-full');
             }
-            //говорим о том, что карточка уже обработана
-            ht__dynamicItems.setAttribute('ht-status', 'true')
+        
+        
+        
+        //говорим о том, что карточка уже обработана
+        ht__dynamicItems.setAttribute('ht-status', 'true');
+        //и показываем скрытые элементы
+        ht__currentTagsWrapperParent.classList.add('opacity-full');
         });
 
-    }, 500);
+
+
+    }, 300);
 };
 //> Функция для работы с тэгами (конец)
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -140,3 +152,4 @@ ht__observer.observe(ht__target, ht__config);
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
+console.log('hello wrold');
