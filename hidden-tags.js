@@ -12,7 +12,7 @@ function ht__finsweetNestStatusChecker() {
             let ht__currentTagsClw = ht__tagWrapper.querySelector('[hidden-tags-counter="clonable-clw"]');
             if (ht__currentTagsClw == null) {
                 clearTimeout(ht__entryPointCounterTimer);
-                ht__entryPointCounterTimer = setTimeout(ht__finsweetNestStatusChecker, 50);
+                ht__entryPointCounterTimer = setTimeout(ht__finsweetNestStatusChecker, 70);
             } else {
                 while (ht__entryPointCounter < ht__listOfTagsWrapper.length) {
                     ht__entryPointCounter++;
@@ -20,7 +20,7 @@ function ht__finsweetNestStatusChecker() {
             }
         });
         if (ht__entryPointCounter == ht__listOfTagsWrapper.length) {
-            // console.log для проверки статуса
+            //console.log для проверки статуса
             // console.log(ht__entryPointCounter + ' == ' + ht__listOfTagsWrapper.length);
             ht__entryPointStatus = true;
         }
@@ -98,14 +98,15 @@ function ht__showTags() {
 
                 //и показываем скрытые тултипы
                 ht__currentTooltipParent.classList.add('opacity-full');
+        
+        
+        
+                //говорим о том, что карточка уже обработана
+                ht__dynamicItems.setAttribute('ht-status', 'true');
             }
-        
-        
-        
-        //говорим о том, что карточка уже обработана
-        ht__dynamicItems.setAttribute('ht-status', 'true');
-        //и показываем скрытые элементы
-        ht__currentTagsWrapperParent.classList.add('opacity-full');
+            //и показываем скрытые элементы
+            ht__currentTagsWrapperParent.classList.add('opacity-full');
+
         });
 
 
@@ -153,5 +154,5 @@ ht__observer.observe(ht__target, ht__config);
 
 setTimeout(function(){
     ht__showTags();
-    ht__finsweetNestStatusChecker();
-}, 6000);
+    // ht__finsweetNestStatusChecker();
+}, 5000);
