@@ -17,7 +17,16 @@ function activeState__syncCategories () {
 }
 
 function activeState__syncTopic () {
-
+    fhTrue__mirror__allTopicButtonsPc.forEach((fhTrue__topicPc, fhTrue__topicPcId) => {
+        if (fhTrue__topicPc.classList.contains('is-active-topic')) {
+            console.log(fhTrue__topicPc);
+            fhFalse__mirror__allTopicButtonsPc[fhTrue__topicPcId].classList.add('is-active-topic');
+            fhFalse__mirror__allTopicButtonsMobile[fhTrue__topicPcId].classList.add('is-active-topic');
+        } else {
+            fhFalse__mirror__allTopicButtonsPc[fhTrue__topicPcId].classList.remove('is-active-topic');
+            fhFalse__mirror__allTopicButtonsMobile[fhTrue__topicPcId].classList.remove('is-active-topic');
+        }
+    });
 }
 
 function activeState__sync () {
