@@ -7,10 +7,9 @@ let fhFalse__mirror__allCategoriesButtonsMobile = document.querySelectorAll('[fh
 
 function activeState__syncCategories () {
     fhTrue__mirror__allCategoriesButtonsPc.forEach((fhTrue__categoryPc, fhTrue__categoryPcId) => {
-        // console.log(fhTrue__categoryPc);
         if (fhTrue__categoryPc.classList.contains('is-active')) {
             fhFalse__mirror__allCategoriesButtonsMobile[fhTrue__categoryPcId].classList.add('is-active');
-            // console.log('добавили класс для' + fhFalse__mirror__allCategoriesButtonsMobile[fhTrue__categoryPcId]);
+            document.querySelector('.filter-and-search-mob_category-dropdown-text.is-category').textContent = fhTrue__categoryPc.querySelector('.blog-articles-filter-and-search_radio-button-text.is-category').textContent;
         } else {
             fhFalse__mirror__allCategoriesButtonsMobile[fhTrue__categoryPcId].classList.remove('is-active');
         }
