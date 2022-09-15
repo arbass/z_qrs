@@ -153,4 +153,5 @@ ht__observer.observe(ht__target, ht__config);
 
 setTimeout(function(){
     ht__showTags();
-}, 5000);
+    ht__finsweetNestStatusChecker();
+}, 6000);
