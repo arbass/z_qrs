@@ -74,3 +74,5 @@ fhFalse__mirror__allCategoriesButtonsMobile.forEach((fhFalse__categoryMobile, fh
         activeState__sync();
     });
 });
+
+activeState__sync();
