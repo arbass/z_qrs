@@ -1,7 +1,6 @@
 let ss__trueInput = document.querySelector('[ss_input="true"]');
 let ss__allNamesElements = document.querySelectorAll('.form_search-nav-cl-i_name');
 let ss__allNames = new Array();
-console.log(ss__allNames);
 
 ss__allNamesElements.forEach(ss__name => {
     ss__allNames.push(ss__name.textContent);
