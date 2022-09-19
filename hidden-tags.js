@@ -64,6 +64,7 @@ function ht__showTags() {
             let ht__maximumForTags = ht__dynamicItems.querySelector('[hidden-tags-counter-max]').getAttribute('hidden-tags-counter-max');
                 ht__maximumForTags = Number(ht__maximumForTags);
             let ht__currentNestTags = ht__dynamicItems.querySelectorAll('[hidden-tags-counter="tag"]');
+            let ht__currentTagCategory = ht__dynamicItems.querySelector('.tag-wrapper.is-current-card-category');
             let ht__currentNestTagsCount = ht__currentNestTags.length;
             let ht__currentTooltipParent = ht__dynamicItems.querySelector('.additional-tags');
             let ht__currentTagsWrapperParent = ht__dynamicItems.querySelector('.blog-articles-list_card-tags-wrapper');
@@ -96,9 +97,11 @@ function ht__showTags() {
                         ht__currentTooltipTextSpan.textContent = '+' + ht__currentTooltipCounter;
                     }
                 });
-
                 //перемещаем тултип в обёртку тэгов 
                 ht__currentTagsWrapperNestElements.append(ht__currentTooltipParent);
+
+                //перемещаем категорию в обёртку тэгов
+                ht__currentNestTags[0].before(ht__currentTagCategory);
 
                 //и показываем скрытые тултипы
                 ht__currentTooltipParent.classList.add('opacity-full');
