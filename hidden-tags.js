@@ -68,6 +68,7 @@ function ht__showTags() {
             let ht__currentTooltipParent = ht__dynamicItems.querySelector('.additional-tags');
             let ht__currentTagsWrapperParent = ht__dynamicItems.querySelector('.blog-articles-list_card-tags-wrapper');
             let ht__currentTooltip = ht__dynamicItems.querySelector('.additional-tags_list-wrapper');
+            let ht__currentTagsWrapperNestElements = ht__dynamicItems.querySelector('.blog-articles-list_card-tags-wrapper_nest');
             let ht__currentTooltipTextSpan = ht__currentTooltipParent.querySelector('.additional-tags_toggle-text');
             let ht__currentTooltipCounter = 0;
             let ht__currentLink = ht__dynamicItems.querySelector('[hidden-tags-counter="main-link"]');
@@ -96,8 +97,12 @@ function ht__showTags() {
                     }
                 });
 
+                //перемещаем тултип в обёртку тэгов 
+                ht__currentTagsWrapperNestElements.append(ht__currentTooltipParent);
+
                 //и показываем скрытые тултипы
                 ht__currentTooltipParent.classList.add('opacity-full');
+                
         
         
         
