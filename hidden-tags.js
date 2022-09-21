@@ -68,6 +68,7 @@ function ht__showTags() {
             let ht__currentNestTagsCount = ht__currentNestTags.length;
             let ht__currentTooltipParent = ht__dynamicItems.querySelector('.additional-tags');
             let ht__currentTagsWrapperParent = ht__dynamicItems.querySelector('.blog-articles-list_card-tags-wrapper');
+            let ht__currentTagsWrapperParentAdd = ht__dynamicItems.querySelector('.clw_blog-articles-list_card-tags-wrapper');            
             let ht__currentTooltip = ht__dynamicItems.querySelector('.additional-tags_list-wrapper');
             let ht__currentTagsWrapperNestElements = ht__dynamicItems.querySelector('.blog-articles-list_card-tags-wrapper_nest');
             let ht__currentTooltipTextSpan = ht__currentTooltipParent.querySelector('.additional-tags_toggle-text');
@@ -114,6 +115,9 @@ function ht__showTags() {
             }
             //и показываем скрытые элементы
             ht__currentTagsWrapperParent.classList.add('opacity-full');
+            if (ht__currentTagsWrapperParentAdd != null) {
+                ht__currentTagsWrapperParentAdd.classList.add('opacity-full');
+            }
 
         });
 
