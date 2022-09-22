@@ -48,3 +48,8 @@ ss__trueInput.addEventListener('focusout', function() {
 ss__mobileSearchTriggerOpen.addEventListener('click', function() {
     document.querySelector('.search-circle_o').click();
 });
+
+ss__mobileSearchTriggerClose.addEventListener('click', function() {
+    document.querySelector('.search-circle_c').click();
+    ss__trueInput.value = '';
+});
