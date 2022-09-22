@@ -1,6 +1,8 @@
 let ss__trueInput = document.querySelector('.input_search-nav');
 let ss__dropdown = document.querySelector('.form_search-nav-1px-parent');
 let ss__closeButton = document.querySelector('.search-nav_search-ico-close');
+let ss__mobileSearchTriggerOpen = document.querySelector('.nav_list-search-trigger-open');
+let ss__mobileSearchTriggerClose = document.querySelector('.search-nav_search-ico-close_click-area');
 
 ss__trueInput.addEventListener('keydown', function() {
     ss__inputJob();
@@ -40,4 +42,9 @@ ss__trueInput.addEventListener('focus', function() {
 
 ss__trueInput.addEventListener('focusout', function() {
     document.querySelector('.search-circle_c').click();
+    ss__trueInput.value = '';
+});
+
+ss__mobileSearchTriggerOpen.addEventListener('click', function() {
+    document.querySelector('.search-circle_o').click();
 });
