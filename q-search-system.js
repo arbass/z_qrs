@@ -29,5 +29,15 @@ function ss__inputJob () {
         } else {
             ss__dropdown.style.display = 'none';
         }
-    }, 200);
+    }, 350);
 }
+
+
+
+ss__trueInput.addEventListener('focus', function() {
+    document.querySelector('.search-circle_o').click();
+});
+
+ss__trueInput.addEventListener('focusout', function() {
+    document.querySelector('.search-circle_c').click();
+});
