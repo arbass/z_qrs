@@ -16,7 +16,6 @@ ak__allGrid.forEach(ak__grid => {
         ak__currentItems.forEach((ak__items,ak__itemsId) => {
             if (ak__currentItemsLength == ak__itemsId) {
                 ak__currentAppendWaiter.append(ak__items);
-                console.log(ak__items);
                 ak__currentItemsLength++;
             }
         });
