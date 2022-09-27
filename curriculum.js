@@ -37,7 +37,6 @@ let all__faqItem__richText = curriculum__section.querySelectorAll('.l-component-
 curriculumSrc__allH3.forEach((srcH3,srcH3Id) => {
     let curriculumParser = srcH3.nextElementSibling.nextElementSibling;
     while (curriculumParser.tagName != 'H3') {
-        console.log(curriculumParser);
 
         all__faqItem__richText[srcH3Id].appendChild(curriculumParser.cloneNode(true));
 
