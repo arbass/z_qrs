@@ -47,3 +47,16 @@ curriculumSrc__allH3.forEach((srcH3,srcH3Id) => {
     }
 
 });
+
+let sticky__curriculum = curriculum__section.querySelector('.column_sticky');
+
+if (sticky__curriculum.classList.contains('w-condition-invisible')) {
+    let simple__curriculumAppender = curriculum__section.querySelector('.course-curriculum_wrapper.var-2');
+    let simple__curriculumTransfer = curriculum__section.querySelector('.l-component-faq_col-2.is-course-curriculum');
+    let simple__curriculumTransfer__innerParent = curriculum__section.querySelector('.l-component-faq_inner.is-course-curriculum.var-2');
+    let simple__curriculumTransfer__innerParentOld = curriculum__section.querySelector('.l-component-faq_inner.is-course-curriculum.var-1');
+
+    simple__curriculumAppender.appendChild(simple__curriculumTransfer);
+    simple__curriculumTransfer__innerParent.classList.add('show-as-flex');
+    simple__curriculumTransfer__innerParentOld.classList.add('hide');
+}
