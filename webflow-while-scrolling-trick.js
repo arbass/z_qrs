@@ -10,6 +10,10 @@ function wwst__opacityMagic () {
                 wwst__opacityElements__item.classList.remove('hide');
             }
         });
+    } else {
+        wwst__opacityElements__array.forEach(wwst__opacityElements__item => {
+            wwst__opacityElements__item.classList.remove('hide');
+        });
     }
 }
 
