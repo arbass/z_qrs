@@ -9,9 +9,17 @@ allCareersCards.forEach(allCareersCard__item => {
         let srcName = allLpSrcClwItem.getAttribute('data-type-of-learn-src');
         if (srcName == currentCareerTitle) {
             currentArray.push(srcName);
-            console.log(srcName);
         }
     });
 
     allCareersCard__item.querySelector('[data-counter-career-span]').innerHTML = currentArray.length;
+});
+
+
+
+//––––––––––––––––––––––––––––––––––
+
+const allTrueFeatured = document.querySelectorAll('[fs-checking-boolean-ak="true"]');
+allTrueFeatured.forEach(allTrueFeatured__item => {
+    allTrueFeatured__item.nextElementSibling.textContent = 'Featured';
 });
