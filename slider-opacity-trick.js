@@ -53,3 +53,4 @@ lpSlider.on('slideChange', function () {
 });
 
 lpSwiperMagic();
+
