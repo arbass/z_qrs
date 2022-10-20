@@ -24,9 +24,13 @@ if (currentSrc.textContent != '') {
     }
     //находим все quote
     let quotes = currentSrc.querySelectorAll('blockquote');
+    let wyw__allRightSections = wywSection.querySelectorAll('[wyw-learn-right]');
+    wyw__allRightSections.forEach(wyw__section => {
+        wyw__section.classList.add('hide');
+    });
     
     function renderBlock__1 () {
-        
+
     }
     
     function renderBlock__2 () {
@@ -38,7 +42,12 @@ if (currentSrc.textContent != '') {
     }
 
     quotes.forEach(quotes__item => {
+        let currentDigit = quotes__item.textContent;
+        currentDigit = Number(currentDigit)
+        currentDigit = currentDigit - 1;
         window['renderBlock__' + quotes__item.textContent]();
+        wywSection.querySelector(`[wyw-learn-right="${quotes__item.textContent}"]`).classList.remove('hide');
+        wywSection.querySelector(`[wyw-learn-right="${quotes__item.textContent}"] h3`).textContent = currentSrc.querySelectorAll(`h3`)[currentDigit].textContent;
     });
 
 }
