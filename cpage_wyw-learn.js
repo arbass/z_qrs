@@ -24,30 +24,63 @@ if (currentSrc.textContent != '') {
     }
     //находим все quote
     let quotes = currentSrc.querySelectorAll('blockquote');
-    let wyw__allRightSections = wywSection.querySelectorAll('[wyw-learn-right]');
+    let wyw__allRightSections = wywSection.querySelectorAll('[wyw-learn-section]');
     wyw__allRightSections.forEach(wyw__section => {
         wyw__section.classList.add('hide');
     });
     
-    function renderBlock__1 () {
+    function renderBlock__1 (currentTitleSrc) {
+        console.log('запустилась функция renderBlock__1');
 
+        let currentContent = wywSection.querySelector('[wyw-learn-section-content="1"]');
+        let allElenetsOfContent = currentContent.querySelectorAll('*');
+        allElenetsOfContent.forEach(element => {
+            element.remove();
+        });
+
+        let currentPositon = currentTitleSrc;
+        while(currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
+            currentPositon = currentPositon.nextElementSibling;
+            let currentPositonClone = currentPositon.cloneNode(true);
+            currentContent.append(currentPositonClone);
+        }
+            
+        
     }
     
     function renderBlock__2 () {
-        
+        console.log('запустилась функция renderBlock__2');
     }
     
     function renderBlock__3 () {
-        
+        console.log('запустилась функция renderBlock__3');
     }
 
     quotes.forEach(quotes__item => {
         let currentDigit = quotes__item.textContent;
         currentDigit = Number(currentDigit)
         currentDigit = currentDigit - 1;
-        window['renderBlock__' + quotes__item.textContent]();
-        wywSection.querySelector(`[wyw-learn-right="${quotes__item.textContent}"]`).classList.remove('hide');
-        wywSection.querySelector(`[wyw-learn-right="${quotes__item.textContent}"] h3`).textContent = currentSrc.querySelectorAll(`h3`)[currentDigit].textContent;
+        wywSection.querySelector(`[wyw-learn-section="${quotes__item.textContent}"]`).classList.remove('hide');
+        
+        
+        let allSectionTitles = wywSection.querySelectorAll('[wyw-learn-section-title]');
+        allSectionTitles.forEach(sectionTitle => {
+            let currentDigitForTitle = sectionTitle.getAttribute('wyw-learn-section-title');
+            currentDigitForTitle = Number(currentDigitForTitle);
+            if ((currentDigit+1) == currentDigitForTitle) {
+                let currentTitleSrc = quotes__item;
+                while (currentTitleSrc.tagName != 'H3') {
+                    currentTitleSrc = currentTitleSrc.nextElementSibling;
+                }
+                sectionTitle.textContent = currentTitleSrc.textContent;
+
+                window['renderBlock__' + quotes__item.textContent](currentTitleSrc);
+            }
+        });
+
+
+
+        
     });
 
 }
