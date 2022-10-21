@@ -30,8 +30,6 @@ if (currentSrc.textContent != '') {
     });
     
     function renderBlock__1 (currentTitleSrc) {
-        console.log('запустилась функция renderBlock__1');
-
         let currentContent = wywSection.querySelector('[wyw-learn-section-content="1"]');
         let allElenetsOfContent = currentContent.querySelectorAll('*');
         allElenetsOfContent.forEach(element => {
@@ -43,17 +41,33 @@ if (currentSrc.textContent != '') {
             currentPositon = currentPositon.nextElementSibling;
             let currentPositonClone = currentPositon.cloneNode(true);
             currentContent.append(currentPositonClone);
+        }        
+    }
+    
+    function renderBlock__2 (currentTitleSrc) {
+        let currentContent = wywSection.querySelector('[wyw-learn-section-content="2"]');
+        let srcContentArray = new Array();
+        let srcContentArrayFigures = new Array();
+
+        let currentPositon = currentTitleSrc;
+        while(currentPositon.nextElementSibling == true && currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
+            currentPositon = currentPositon.nextElementSibling;
+            srcContentArray.push(currentPositon);
         }
-            
         
+        srcContentArray.forEach(el => {
+            if (el.tagName == 'FIGURE') {
+                srcContentArrayFigures.push(el);
+            }
+        });
+        
+        srcContentArrayFigures.forEach(figure => {
+            
+        });
     }
     
-    function renderBlock__2 () {
-        console.log('запустилась функция renderBlock__2');
-    }
-    
-    function renderBlock__3 () {
-        console.log('запустилась функция renderBlock__3');
+    function renderBlock__3 (currentTitleSrc) {
+
     }
 
     quotes.forEach(quotes__item => {
