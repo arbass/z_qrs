@@ -63,10 +63,10 @@ if (currentSrc.textContent != '') {
         });
         
         srcContentArrayFigures.forEach(figure => {
-            let clonableItem = currentContent.querySelector('[wyw-learn-section-item="1"]').cloneNode(true);
-            let clonableItemImg = clonableItem.querySelector('[wyw-learn-section-item-image="1"]');
-            let clonableItemTitle = clonableItem.querySelector('[wyw-learn-section-item-title="1"]');
-            let clonableItemText = clonableItem.querySelector('[wyw-learn-section-item-text="1"]');
+            let clonableItem = currentContent.querySelector('[wyw-learn-section-item="2"]').cloneNode(true);
+            let clonableItemImg = clonableItem.querySelector('[wyw-learn-section-item-image="2"]');
+            let clonableItemTitle = clonableItem.querySelector('[wyw-learn-section-item-title="2"]');
+            let clonableItemText = clonableItem.querySelector('[wyw-learn-section-item-text="2"]');
 
             let srcImageUrl = figure.querySelector('img').src;
             let srcCaption__1 = figure.querySelector('figcaption').textContent.split('/')[0];
@@ -79,12 +79,40 @@ if (currentSrc.textContent != '') {
             currentContent.append(clonableItem);
         });
 
-        let clonableItem = currentContent.querySelectorAll('[wyw-learn-section-item="1"]')[0];
+        let clonableItem = currentContent.querySelectorAll('[wyw-learn-section-item="2"]')[0];
         clonableItem.remove();
     }
     
     function renderBlock__3 (currentTitleSrc) {
+        let currentContent = wywSection.querySelector('[wyw-learn-section-content="3"]');
+        let srcContentArray = new Array();
+        let srcContentArrayFigures = new Array();
 
+        let currentPositon = currentTitleSrc;
+        while(currentPositon.nextElementSibling != undefined && currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
+            currentPositon = currentPositon.nextElementSibling;
+            srcContentArray.push(currentPositon);
+        }
+        
+        srcContentArray.forEach(el => {
+            if (el.tagName == 'FIGURE') {
+                srcContentArrayFigures.push(el);
+            }
+        });
+        
+        srcContentArrayFigures.forEach(figure => {
+            let clonableItem = currentContent.querySelector('[wyw-learn-section-item="3"]').cloneNode(true);
+            let clonableItemImg = clonableItem.querySelector('[wyw-learn-section-item-image="3"]');
+
+            let srcImageUrl = figure.querySelector('img').src;
+
+            clonableItemImg.src = srcImageUrl;
+
+            currentContent.append(clonableItem);
+        });
+
+        let clonableItem = currentContent.querySelectorAll('[wyw-learn-section-item="3"]')[0];
+        clonableItem.remove();
     }
 
     quotes.forEach(quotes__item => {
