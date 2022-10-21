@@ -37,7 +37,8 @@ if (currentSrc.textContent != '') {
         });
 
         let currentPositon = currentTitleSrc;
-        while(currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
+        
+        while(currentPositon.nextElementSibling != undefined && currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
             currentPositon = currentPositon.nextElementSibling;
             let currentPositonClone = currentPositon.cloneNode(true);
             currentContent.append(currentPositonClone);
@@ -50,7 +51,7 @@ if (currentSrc.textContent != '') {
         let srcContentArrayFigures = new Array();
 
         let currentPositon = currentTitleSrc;
-        while(currentPositon.nextElementSibling == true && currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
+        while(currentPositon.nextElementSibling != undefined && currentPositon.nextElementSibling.tagName != 'BLOCKQUOTE') {
             currentPositon = currentPositon.nextElementSibling;
             srcContentArray.push(currentPositon);
         }
@@ -62,8 +63,24 @@ if (currentSrc.textContent != '') {
         });
         
         srcContentArrayFigures.forEach(figure => {
-            
+            let clonableItem = currentContent.querySelector('[wyw-learn-section-item="1"]').cloneNode(true);
+            let clonableItemImg = clonableItem.querySelector('[wyw-learn-section-item-image="1"]');
+            let clonableItemTitle = clonableItem.querySelector('[wyw-learn-section-item-title="1"]');
+            let clonableItemText = clonableItem.querySelector('[wyw-learn-section-item-text="1"]');
+
+            let srcImageUrl = figure.querySelector('img').src;
+            let srcCaption__1 = figure.querySelector('figcaption').textContent.split('/')[0];
+            let srcCaption__2 = figure.querySelector('figcaption').textContent.split('/')[1];
+
+            clonableItemImg.src = srcImageUrl;
+            clonableItemTitle.textContent = srcCaption__1;
+            clonableItemText.textContent = srcCaption__2;
+
+            currentContent.append(clonableItem);
         });
+
+        let clonableItem = currentContent.querySelectorAll('[wyw-learn-section-item="1"]')[0];
+        clonableItem.remove();
     }
     
     function renderBlock__3 (currentTitleSrc) {
