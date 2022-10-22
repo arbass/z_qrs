@@ -26,7 +26,7 @@ curriculum__src__titles.forEach(el__src => {
             clonableItem__title.textContent = el__src.textContent;
         //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
             //поймём есть ли у нас иконка
-            let icoFinder = el__src;
+            let icoFinder = el__src.nextElementSibling;
 
             while (icoFinder != null && icoFinder.tagName != 'H2') {
                 if (icoFinder.tagName == 'FIGURE') {
@@ -40,7 +40,7 @@ curriculum__src__titles.forEach(el__src => {
             }
 
         //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-            let titleFinder = el__src;
+            let titleFinder = el__src.nextElementSibling;
 
             while (titleFinder != null && titleFinder.tagName != 'H2') {
                 if (titleFinder.tagName == 'BLOCKQUOTE') {
