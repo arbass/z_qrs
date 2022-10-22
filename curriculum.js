@@ -1,53 +1,89 @@
 let curriculum__section = document.querySelector('[cpage-section="curriculum"]');
 let curriculum__src = curriculum__section.querySelector('.text-rich-text.is-src');
 
-let curriculum__titles = curriculum__section.querySelectorAll('.l-component-faq_col-1.is-course-curriculum h2');
-curriculum__titles.forEach(title => {
-    title.textContent = curriculum__src.querySelector('h2').textContent;
+let curriculum__section__title = curriculum__section.querySelector('[curriculum-headline]');
+curriculum__section__title.textContent = curriculum__src.querySelector('h1').textContent;
+
+let curriculum__allMetaRows = curriculum__section.querySelectorAll('[curriculum-item-meta]');
+let curriculum__allMetaIco = curriculum__section.querySelectorAll('[curriculum-item-meta-ico]');
+let curriculum__allMetaTxt = curriculum__section.querySelectorAll('[curriculum-item-meta-ico-title]');
+
+let curriculum__grid = curriculum__section.querySelector('[curriculum-grid]');
+
+curriculum__allMetaRows.forEach(el => {
+    el.classList.add('hide');
 });
 
-let curriculumSrc__allH3 = curriculum__src.querySelectorAll('h3');
-let clonable__curriculumItemWaiter = curriculum__section.querySelector('.l-component-faq_col-2.is-course-curriculum');
-
-curriculumSrc__allH3.forEach((srcH3,srcH3Id) => {
-    let clonable__curriculumItem = curriculum__section.querySelector('.l-component-faq_item').cloneNode(true);
-    let clonable__curriculumItem__title = clonable__curriculumItem.querySelector('.l-component-faq_curriculum h3');
-    let clonable__curriculumItem__duration = clonable__curriculumItem.querySelector('.course-curriculum_duration-wrapper p');
-    let clonable__curriculumItem__richText = clonable__curriculumItem.querySelector('.l-component-wyw-get_rich-text-2');
-    let clonable__curriculumItem__richText__innerElements = clonable__curriculumItem__richText.querySelectorAll('*');
-    clonable__curriculumItem__richText__innerElements.forEach(el => {
-        el.remove();
-    });
-
-    clonable__curriculumItem__title.textContent = srcH3.textContent;
-    clonable__curriculumItem__duration.textContent = srcH3.nextElementSibling.textContent;
-
-
-
-
-    clonable__curriculumItemWaiter.appendChild(clonable__curriculumItem);
+curriculum__allMetaIco.forEach(el => {
+    el.classList.add('hide');
 });
 
-let all__curriculumItem = curriculum__section.querySelectorAll('.l-component-faq_item');
-all__curriculumItem[0].remove();
+let curriculum__src__titles = curriculum__src.querySelectorAll('h2');
 
+curriculum__src__titles.forEach(el__src => {
+            let clonableItem = curriculum__section.querySelector('[curriculum-item]').cloneNode(true);
+            let clonableItem__title = clonableItem.querySelector('[curriculum-item-title]');
+            clonableItem__title.textContent = el__src.textContent;
+        //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            //поймём есть ли у нас иконка
+            let icoFinder = el__src;
 
-let all__faqItem__richText = curriculum__section.querySelectorAll('.l-component-wyw-get_rich-text-2');
+            while (icoFinder.nextElementSibling != null && icoFinder.nextElementSibling.tagName != 'H2') {
+                if (icoFinder.tagName == 'FIGURE') {
+                    let clonableItem__ico = clonableItem.querySelector('[curriculum-item-meta-ico]');
+                    let currentFigureImg = icoFinder.querySelector('img');
+                    let currentFigureImgSrc = currentFigureImg.getAttribute('src');
+                    clonableItem__ico.src = currentFigureImgSrc;
+                    clonableItem__ico.classList.remove('hide');
+                }
+                icoFinder = icoFinder.nextElementSibling;
+            }
 
-curriculumSrc__allH3.forEach((srcH3,srcH3Id) => {
-    let curriculumParser = srcH3.nextElementSibling.nextElementSibling;
-    while (curriculumParser.tagName != 'H3') {
+        //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            let titleFinder = el__src;
 
-        all__faqItem__richText[srcH3Id].appendChild(curriculumParser.cloneNode(true));
+            while (titleFinder.nextElementSibling != null && titleFinder.nextElementSibling.tagName != 'H2') {
+                if (titleFinder.tagName == 'BLOCKQUOTE') {
+                    let clonableItem__metaTitle = clonableItem.querySelector('[curriculum-item-meta-ico-title]');
+                    clonableItem__metaTitle.textContent = titleFinder.textContent;
 
-        curriculumParser = curriculumParser.nextElementSibling;
-        if (curriculumParser == null) {
-            break;
-        }
-    }
+                    clonableItem__metaTitle.parentElement.classList.remove('hide');
+                }
+                titleFinder = titleFinder.nextElementSibling;
+            }
 
+        //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+            let contentFinder = el__src.nextElementSibling;
+            let contentArray = new Array();
+            //удаляем внутррености блока
+            let clonableItem__metaContent = clonableItem.querySelector('[curriculum-item-content]');
+            let clonableItem__metaContentInnerElements = clonableItem__metaContent.querySelectorAll('*');
+            clonableItem__metaContentInnerElements.forEach(el => {
+                el.remove();
+            });
+
+            while (contentFinder != null && contentFinder.tagName != 'H2') {
+                if (contentFinder.tagName != 'BLOCKQUOTE' && contentFinder.tagName != 'FIGURE' && contentFinder.tagName != 'H1') {
+                    contentArray.push(contentFinder);
+                }
+                contentFinder = contentFinder.nextElementSibling;
+            }
+            contentArray.forEach(el => {
+                clonableItem__metaContent.appendChild(el);
+            });
+            
+            curriculum__grid.appendChild(clonableItem);
 });
 
+let curriculum__clonableItemAll = curriculum__section.querySelectorAll('[curriculum-item]');
+curriculum__clonableItemAll[0].remove();
+
+
+
+
+
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//если стики будет не заполнен
 let sticky__curriculum = curriculum__section.querySelector('.column_sticky');
 
 if (sticky__curriculum.classList.contains('w-condition-invisible')) {
