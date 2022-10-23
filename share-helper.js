@@ -1,15 +1,23 @@
-let allShareElements = document.querySelectorAll('[share-helper="el"]');
+let allShareElements = document.querySelectorAll('[share-helper="thread"]');
 
 allShareElements.forEach(shareElement => {
-    let currentLink;
-    if (shareElement.previousElementSibling.tagName === 'A') {
-        currentLink = shareElement.previousElementSibling.href;
-        let currentFinSweetElements = shareElement.querySelectorAll('[fs-socialshare-element="url"]');
-        currentFinSweetElements.forEach(sweetEl => {
-            sweetEl.textContent = currentLink;
-        });
-        shareElement.classList.remove('hide');
+    let currentLinksWrapper = shareElement.querySelector('[share-helper="links-wrapper"]');
+    let currentCardLink = shareElement.previousElementSibling;
+    let currentExternalLink = currentLinksWrapper.querySelector('[share-helper="external"]');
+    let currentIternalLink = currentLinksWrapper.querySelector('[share-helper="iternal"]');
+
+    if (currentExternalLink.getAttribute('href') != '#') {
+        currentCardLink.setAttribute('href', currentExternalLink.getAttribute('href'));
+        currentCardLink.setAttribute('target', '_blank');
     } else {
-        console.log('😡😡😡 the structure of elements for automatic link detection is broken');
+        let partOfUrl__1 = window.location.origin;
+        let partOfUrl__2 = currentIternalLink.getAttribute('href');
+
+        currentCardLink.setAttribute('href', partOfUrl__1 + partOfUrl__2);
     }
+    //теперь нужно установить ссылку для всех share-кнопок
+    let currentShareButtons = shareElement.querySelectorAll('[fs-socialshare-element="url"]');
+    currentShareButtons.forEach(shareButton => {
+        shareButton.textContent = currentCardLink.getAttribute('href');
+    });
 });
